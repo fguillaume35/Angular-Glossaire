@@ -1,0 +1,15 @@
+
+
+<div id="search-component">
+  <h4><label for="search-box">Recherche</label></h4>
+
+  <input #searchBox id="search-box" (input)="search(searchBox.value)" />
+
+  <ul class="search-result">
+    <li *ngFor="let glossaire of glossaires$ | async" >
+      <a [routerLink]="['/glossaire', glossaire.id]">
+        {{glossaire.name}}
+      </a>
+    </li>
+  </ul>
+</div>

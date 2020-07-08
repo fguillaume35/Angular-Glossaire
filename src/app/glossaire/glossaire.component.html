@@ -1,0 +1,42 @@
+<!-- Liste -->
+
+<!-- <h2> Liste des définitions</h2>
+<ul class="glossaires">
+  <li *ngFor="let glossaire of glossaires"
+  [class.selected]="glossaire === selectedGlossaire"
+  (click)="onSelect(glossaire)">
+  <span class="badge"> {{glossaire.id}}</span> {{glossaire.name}}
+  </li>
+</ul>
+<app-glossaire-detail [glossaire]="selectedGlossaire"></app-glossaire-detail> -->
+
+<h2> Liste des définitions</h2>
+<div>
+  <label>Nom :
+    <input #glossaireName />
+  </label>
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button (click)="add(glossaireName.value); glossaireName.value=''">
+    ajouter
+  </button>
+</div>
+<ul class="glossaires">
+  <li *ngFor="let glossaire of glossaires">
+  <a [routerLink]="['/glossaire/',glossaire.id]">
+    <span class="badge"> {{glossaire.id}}</span> {{glossaire.name}} </a>
+    <button class="delete" title="supprimer"
+          (click)="delete(glossaire)">x</button>
+  </li>
+</ul>
+
+
+<!-- Détails -->
+<!-- <div *ngIf="selectedGlossaire">
+  <h2>Détail : {{selectedGlossaire.name | uppercase}}</h2>
+  <div><span>id: </span>{{selectedGlossaire.id}}</div>
+  <div>
+    <label>Nom :
+      <input [(ngModel)]="selectedGlossaire.name" placeholder="nom"/>
+    </label>
+  </div>
+</div> -->

@@ -1,0 +1,11 @@
+<div *ngIf="glossaire">
+  <h2>Détail : {{glossaire.name | uppercase}}</h2>
+  <div><span>id: </span>{{glossaire.id}}</div>
+  <div>
+    <label>Nom :
+      <input [(ngModel)]="glossaire.name" placeholder="nom"/>
+    </label>
+  </div>
+  <button (click)="save()">Enregistrer</button>
+  <button class="btn btn-primary" (click)="goBack()">Retour</button>
+</div>
