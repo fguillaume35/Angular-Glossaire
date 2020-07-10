@@ -11,8 +11,8 @@ import { catchError, map, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class GlossaireService {
-
-  private glossairesUrl = 'api/glossaires';
+  private  glossaireslist: Glossaire[];
+  private glossairesUrl = 'http://localhost:3000/posts';
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -22,6 +22,14 @@ export class GlossaireService {
       tap(_ => this.log('fetched glossaires')),
       catchError(this.handleError<Glossaire[]>('getGlossaires', []))
     );
+  }
+
+  genId(): number {
+    this.http.get<Glossaire[]>(this.glossairesUrl).subscribe(glossaires => this.glossaireslist = glossaires);
+    if (this.glossaireslist == null) {
+       return 1;
+     }
+    return this.glossaireslist.length > 0 ? Math.max(...this.glossaireslist.map(glossaire => glossaire.id)) + 1 : 11;
   }
 
   getGlossaire(id: number): Observable<Glossaire> {
@@ -38,7 +46,7 @@ export class GlossaireService {
       // if not search term, return empty glossaire array.
       return of([]);
     }
-    return this.http.get<Glossaire[]>(`${this.glossairesUrl}/?name=${term}`).pipe(
+    return this.http.get<Glossaire[]>(`${this.glossairesUrl}?name=${term}`).pipe(
       tap(x => x.length ?
           this.log(`found glossaires matching "${term}"`) :
           this.log(`no glossaire matching "${term}"`)),
@@ -47,8 +55,9 @@ export class GlossaireService {
   }
 
   /** PUT: update the glossaire on the server */
-  updateHero(glossaire: Glossaire): Observable<any> {
-    return this.http.put(this.glossairesUrl, glossaire, this.httpOptions).pipe(
+  updateGlossaire(glossaire: Glossaire): Observable<Glossaire> {
+    const url = `${this.glossairesUrl}/${glossaire.id}`;
+    return this.http.put(url, glossaire, this.httpOptions).pipe(
       tap(_ => this.log(`updated hero id=${glossaire.id}`)),
       catchError(this.handleError<any>('updateGlossaire'))
     );
@@ -56,6 +65,7 @@ export class GlossaireService {
 
   /** POST: add a new glossaire to the server */
   addGlossaire(glossaire: Glossaire): Observable<Glossaire> {
+/*     glossaire.id = this.genId(); */
     return this.http.post<Glossaire>(this.glossairesUrl, glossaire, this.httpOptions).pipe(
       tap((newGlossaire: Glossaire) => this.log(`added hero w/ id=${newGlossaire.id}`)),
       catchError(this.handleError<Glossaire>('addGlossaire'))

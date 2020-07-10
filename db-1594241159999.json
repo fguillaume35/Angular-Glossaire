@@ -1,0 +1,28 @@
+{
+  "posts": [
+    {
+      "name": "composan",
+      "id": 2
+    },
+    {
+      "name": "Directiv",
+      "id": 5
+    },
+    {
+      "name": "service",
+      "id": 6
+    },
+    {
+      "name": "Module",
+      "id": 7
+    },
+    {
+      "name": "dsf",
+      "id": 8
+    }
+  ],
+  "comments": [],
+  "profile": {
+    "name": "typicode"
+  }
+}

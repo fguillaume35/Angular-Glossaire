@@ -22,7 +22,7 @@ export class GlossaireDetailComponent implements OnInit {
       .subscribe(glossaire => this.glossaire = glossaire);
   }
   save(): void {
-    this.glossaireService.updateHero(this.glossaire)
+    this.glossaireService.updateGlossaire(this.glossaire)
       .subscribe(() => this.goBack());
   }
 

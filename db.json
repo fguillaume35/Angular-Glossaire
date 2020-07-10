@@ -1,0 +1,32 @@
+{
+  "posts": [
+    {
+      "name": "composant",
+      "id": 2
+    },
+    {
+      "name": "Directive",
+      "id": 5
+    },
+    {
+      "name": "service",
+      "id": 6
+    },
+    {
+      "name": "Module",
+      "id": 7
+    },
+    {
+      "name": "dsf",
+      "id": 8
+    },
+    {
+      "name": "Router",
+      "id": 9
+    }
+  ],
+  "comments": [],
+  "profile": {
+    "name": "typicode"
+  }
+}
